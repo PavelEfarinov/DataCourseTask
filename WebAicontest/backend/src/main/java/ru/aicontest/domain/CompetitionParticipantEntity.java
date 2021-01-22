@@ -8,7 +8,6 @@ public class CompetitionParticipantEntity {
     private int id;
 
     private String baseUserLogin;
-
     private RatingEloEntity ratingElo;
 
     @OneToOne

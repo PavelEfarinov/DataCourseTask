@@ -1,6 +1,6 @@
 <template>
   <div>
-    There are your competitions, fucker!
+    <h3>Running competitions:</h3>
     <div>
       <ol v-for="item in competitions" :key="item.id">
         <a href="#page=Competition" @click="openCompetitionPage(item)">{{ item.name }}</a>
