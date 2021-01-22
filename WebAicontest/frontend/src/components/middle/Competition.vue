@@ -3,16 +3,19 @@
     <h1>
       {{ competition.name }}
     </h1>
-    {{ competition.description }}<br/>
+    <div v-if="user">
+      <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
+      <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
+    </div>
+    <article>
+      <div class="body">{{ competition.description }}</div>
+    </article>
+
     <h3>Starts at:</h3> {{ competition.startDate }}
     <h3>Ends at:</h3>
     <div v-if="competition.endDate">{{ competition.endDate }}</div>
     <div v-else>This competition does not have proper end date.</div>
     <br/>
-    <div v-if="user">
-      <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
-      <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
-    </div>
     <div class="error">{{error}}</div>
     <div class="datatable">
       <div class="caption">TOP-10 players</div>
@@ -32,10 +35,6 @@
       </table>
     </div>
 
-    <h3>TOP-10 players:</h3>
-    <div v-for="player in players" :key="player.baseUserLogin">
-      {{ player.baseUserLogin }} - {{ player.ratingElo.rating }}
-    </div>
     <h3>Rating rounds:</h3>
     <div v-for="round in rounds" :key="round.id">
       Rating round will occur at: {{ round.startTime }}

@@ -3,12 +3,24 @@
     <h1>
       {{ competition.name }}
     </h1>
-    <h3>Available storages:</h3>
-    <div v-for="storage in storages" :key="storage.id">
-      <h4>
-        {{ storage.name }} Responsible: {{ storage.storageManager.baseUserLogin }}
-        <button @click="getStorageInfo(storage)">Show items</button>
-      </h4>
+    <div class="datatable">
+      <div class="caption">Available storages</div>
+      <table>
+        <thead>
+        <tr>
+          <th>Name</th>
+          <th>Responsible</th>
+          <th>Items</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="storage in storages" :key="storage.id">
+          <td>{{ storage.name }}</td>
+          <td>{{storage.storageManager.baseUserLogin}}</td>
+          <td><button @click="getStorageInfo(storage)">Show items</button></td>
+        </tr>
+        </tbody>
+      </table>
     </div>
 
     <div v-if="activeStorage">
