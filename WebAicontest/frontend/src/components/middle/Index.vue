@@ -1,11 +1,21 @@
 <template>
   <div>
     <h3>Running competitions:</h3>
-    <div>
-      <ol v-for="item in competitions" :key="item.id">
-        <a href="#page=Competition" @click="openCompetitionPage(item)">{{ item.name }}</a>
-        {{item.description}}
-      </ol>
+    <div class="datatable">
+      <table>
+        <thead>
+        <tr>
+          <th>Competition name</th>
+          <th>Description</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in competitions" :key="item.id">
+          <td><a href="#page=Competition" @click="openCompetitionPage(item)">{{ item.name }}</a></td>
+          <td>{{item.description}}</td>
+        </tr>
+        </tbody>
+      </table>
     </div>
   </div>
 </template>

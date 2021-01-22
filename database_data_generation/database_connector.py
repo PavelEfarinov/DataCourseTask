@@ -6,6 +6,6 @@ def establish_database_connection():
     connection = psycopg2.connect(host='localhost',
                                   database='postgres',
                                   user='postgres',
-                                  password='password')
+                                  password='123456')
     connection.autocommit = True
     return connection
