@@ -3,6 +3,7 @@
     <h1>
       {{ competition.name }}
     </h1>
+    <h3>Your rating: {{participant.ratings.rating}}</h3>
     <h3>Created requests:</h3>
     <div v-for="request in requests" :key="request.id">
       <h4>{{ request.theme + "(" + request.requestStatus + ")" }}</h4>
@@ -30,7 +31,7 @@ export default {
     },
   },
   beforeMount() {
-    axios.get("/api/1/request/" + this.participant + "/created", {}).then(response => {
+    axios.get("/api/1/request/" + this.participant.id + "/created", {}).then(response => {
       this.requests = response.data;
     });
   }

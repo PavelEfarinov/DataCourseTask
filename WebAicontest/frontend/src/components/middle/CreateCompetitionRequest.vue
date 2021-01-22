@@ -40,7 +40,7 @@ export default {
   },
   methods: {
     submitRequest() {
-      axios.post("/api/1/request/" + this.participant + "/new", {
+      axios.post("/api/1/request/" + this.participant.id + "/new", {
         theme: this.theme,
         description: this.description,
       }, {}).then(response => {

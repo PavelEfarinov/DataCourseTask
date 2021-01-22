@@ -15,11 +15,11 @@ public interface CompetitionParticipantRepository extends JpaRepository<Competit
     List<CompetitionParticipantEntity> getFirst10OfCompetition(int id);
 
     @Transactional
-    @Query(value = "SELECT id FROM competition_participant where competition_id = ?1 and base_user_login = ?2", nativeQuery = true)
-    Integer getCompetitionParticipant(int competitionId, String participantLogin);
+    @Query(value = "SELECT * FROM competition_participant where competition_id = ?1 and base_user_login = ?2", nativeQuery = true)
+    CompetitionParticipantEntity getCompetitionParticipant(int competitionId, String participantLogin);
 
     @Transactional
     @Modifying
-    @Query(value = "SELECT 1 FROM partake_in_competition(?2, ?1)", nativeQuery = true)
+    @Query(value = "SELECT * FROM partake_in_competition(?2, ?1)", nativeQuery = true)
     List<Integer> createCompetitionParticipant(int competitionId, String participantLogin);
 }

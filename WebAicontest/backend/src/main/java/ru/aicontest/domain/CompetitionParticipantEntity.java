@@ -1,7 +1,6 @@
 package ru.aicontest.domain;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
 @Table(name = "competition_participant", schema = "public", catalog = "postgres")
@@ -10,15 +9,16 @@ public class CompetitionParticipantEntity {
 
     private String baseUserLogin;
 
-    private List<RatingEloEntity> ratings;
+    private RatingEloEntity ratingElo;
 
-    @OneToMany(mappedBy = "participantId")
-    public List<RatingEloEntity> getRatings() {
-        return ratings;
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "participant_id")
+    public RatingEloEntity getRatingElo() {
+        return ratingElo;
     }
 
-    public void setRatings(List<RatingEloEntity> ratings) {
-        this.ratings = ratings;
+    public void setRatingElo(RatingEloEntity ratingElo) {
+        this.ratingElo = ratingElo;
     }
 
     @Basic

@@ -4,6 +4,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import ru.aicontest.domain.CompetitionParticipantEntity;
 import ru.aicontest.repository.CompetitionParticipantRepository;
 
 @RestController
@@ -16,12 +17,13 @@ public class CompetitionParticipantController {
     }
 
     @GetMapping("{competitionId}/{participantLogin}/id")
-    int getCompetitionParticipantId(@PathVariable int competitionId, @PathVariable String participantLogin){
-        Integer id = competitionParticipantRepository.getCompetitionParticipant(competitionId, participantLogin);
-        if(id == null)
+    CompetitionParticipantEntity getCompetitionParticipantId(@PathVariable int competitionId, @PathVariable String participantLogin){
+        CompetitionParticipantEntity participant = competitionParticipantRepository.getCompetitionParticipant(competitionId, participantLogin);
+        if(participant == null)
         {
-            id = competitionParticipantRepository.createCompetitionParticipant(competitionId, participantLogin).get(0);
+            competitionParticipantRepository.createCompetitionParticipant(competitionId, participantLogin);
+            participant = competitionParticipantRepository.getCompetitionParticipant(competitionId, participantLogin);
         }
-        return id;
+        return participant;
     }
 }
