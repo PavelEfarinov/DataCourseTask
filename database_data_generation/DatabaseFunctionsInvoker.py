@@ -1,6 +1,7 @@
 import string
 
 from generation_consts import TURN_NUMBER
+from random_entities_generator import generate_competition_description
 
 
 class DatabaseFunctionsInvoker:
@@ -20,17 +21,17 @@ class DatabaseFunctionsInvoker:
         self.cursor.execute('select id from testing_system where url = %s', ('https://www.chess.com',))
         ts_id = self.cursor.fetchone()[0]
         self.cursor.execute('select create_competition(%s,%s,localtimestamp,%s,%s)',
-                            ('test_name_{0}'.format(competition_number),
-                             'test_description_{0}'.format(competition_number),
+                            ('Generated competition {0}'.format(competition_number),
+                             generate_competition_description(),
                              'online',
                              ts_id,))
         new_competition_id = self.cursor.fetchone()[0]
 
         return new_competition_id
 
-    def create_competition_solution(self, login: string, competition_id: int):
-        self.cursor.execute('select add_user_solution(%s,%s,%s,%s)',
-                            (login, 'test_solution_location', 'java', competition_id))
+    def create_competition_solution(self, participant_id: int, competition_id: int):
+        self.cursor.execute('select add_user_solution(%s,%s,%s)',
+                            (participant_id, 'test_solution_location', 'java'))
         return self.cursor.fetchone()[0]
 
     def create_test_sandbox_match(self, match_creator_id: int, solution_white_id: int, solution_black_id: int):

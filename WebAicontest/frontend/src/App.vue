@@ -56,12 +56,12 @@ export default {
       });
     });
 
-    this.$root.$on("onSubmitFile", (file, user, language) => {
+    this.$root.$on("onSubmitFile", (file, participant, language) => {
       let formData = new FormData();
       formData.append('file', file);
-      formData.append('user', user);
+      formData.append('participant', participant.id);
       formData.append('language', language);
-      axios.post("api/1/submit", formData,
+      axios.post("api/1/solution/submit", formData,
           {
             headers: {
               'Content-Type': 'multipart/form-data'

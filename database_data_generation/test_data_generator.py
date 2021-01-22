@@ -43,7 +43,7 @@ try:
             competition_participants[-1].competition_id = competition_id
             competition_participants[-1].participant_id = dfi.partake_in_competition(user, competition_id)
             for _ in range(competition_participants[-1].number_of_solutions):
-                competition_participants[-1].solutions.append(dfi.create_competition_solution(user, competition_id))
+                competition_participants[-1].solutions.append(dfi.create_competition_solution(competition_participants[-1].participant_id, competition_id))
                 dfi.compile_solution(competition_participants[-1].solutions[-1])
 
         rating_rounds = []
@@ -107,7 +107,7 @@ try:
 
         for i in range(STORAGES_NUMBER):
             storage_id = dfi.create_storage(competition_id, competition_managers[0].manager_id,
-                                            'storage number {0}'.format(i))
+                                            'Storage {0}'.format(i))
             equipment_ids = []
             for _ in range(EQUIPMENT_PIECES_NUMBER):
                 type = generate_equipment_type()

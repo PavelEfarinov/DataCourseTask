@@ -54,15 +54,11 @@ test_petya_participant_id = partake_in_competition('petya', test_competition_id)
 perform partake_in_competition('efarinovPublic', test_competition_id);
 perform partake_in_competition('untitledUser', test_competition_id);
 
-test_vanya_solution_id = add_user_solution('vanya', 'some_folder', 'c++', test_competition_id);
-test_petya_solution_id = add_user_solution('petya', 'some_folder', 'java', test_competition_id);
-test_efarinov_solution_id = add_user_solution('efarinovPublic', 'some_folder', 'go', test_competition_id);
-test_untitled_solution_id = add_user_solution('untitledUser', 'some_folder', 'c#', test_competition_id);
+test_vanya_solution_id = add_user_solution(test_vanya_participant_id, 'some_folder', 'c++');
+test_petya_solution_id = add_user_solution(test_petya_participant_id, 'some_folder', 'java');
 
 perform make_solution_compiled(test_vanya_solution_id);
 perform make_solution_compiled(test_petya_solution_id);
-perform make_solution_compiled(test_efarinov_solution_id);
-perform make_solution_compiled(test_untitled_solution_id);
 
 test_chess_match_id = create_match(null, 'standard chess map', false, null, ARRAY[test_vanya_solution_id, test_petya_solution_id]);
 

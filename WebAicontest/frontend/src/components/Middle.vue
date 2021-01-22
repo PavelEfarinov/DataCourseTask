@@ -5,7 +5,7 @@
       <Enter v-if="page === 'Enter'"/>
       <Register v-if="page === 'Register'"/>
       <MyProfile v-if="page === 'MyProfile'" :user="user"/>
-      <UploadSolution v-if="page === 'UploadSolution'" :user="user"/>
+      <UploadSolution v-if="page === 'UploadSolution'" :participant="participant"/>
       <MySolutions v-if="page === 'MySolutions'" :user="user"/>
       <Competition v-if="page === 'Competition'" :user="user" :competition="competition"/>
       <CompetitionParticipant v-if="page === 'CompetitionParticipant'" :participant="participant" :competition="competition"/>

@@ -1,8 +1,7 @@
 package ru.aicontest.service;
 
 import org.springframework.stereotype.Service;
-import ru.aicontest.domain.BaseUserEntity;
-import ru.aicontest.domain.SolutionEntity;
+import org.springframework.web.multipart.MultipartFile;
 import ru.aicontest.repository.SolutionRepository;
 
 @Service
@@ -13,9 +12,8 @@ public class SolutionService {
         this.solutionRepository = solutionRepository;
     }
 
-    public long upload(BaseUserEntity user) {
-        SolutionEntity solution = new SolutionEntity();
-        solutionRepository.save(solution);
-        return solution.getId();
+    public void uploadSolution(int participantId, MultipartFile file, String language) {
+        int solutionId = solutionRepository.addNewSolution(participantId, participantId + "/" + file.getOriginalFilename() + "_" + file.getSize(), language).get(0);
+        solutionRepository.compileNewSolution(solutionId, participantId + "/compiled/" + file.getOriginalFilename() + "_" + file.getSize());
     }
 }

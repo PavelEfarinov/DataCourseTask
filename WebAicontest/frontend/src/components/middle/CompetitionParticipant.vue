@@ -12,6 +12,7 @@
     </div>
     <br/>
     <a href="#page=CreateCompetitionRequest" @click="changePage('CreateCompetitionRequest')"><button>Create new request</button></a>
+    <a href="#page=UploadSolution" @click="changePage('UploadSolution')">Upload solution</a>
   </div>
 </template>
 

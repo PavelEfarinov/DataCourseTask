@@ -23,9 +23,6 @@
         <li v-if="user">
           <a href="#page=MyProfile" @click="changePage('MyProfile')">My profile</a>
         </li>
-        <li v-if="user">
-          <a href="#page=UploadSolution" @click="changePage('UploadSolution')">Upload solution</a>
-        </li>
       </ul>
     </nav>
   </header>
@@ -43,6 +40,9 @@ export default {
       this.changePage('Enter');
     });
     this.$root.$on("onSubmitRequestSuccess", () => {
+      this.changePage('CompetitionParticipant');
+    });
+    this.$root.$on("onSubmitSuccess", () => {
       this.changePage('CompetitionParticipant');
     });
   },

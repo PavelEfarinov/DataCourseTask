@@ -23,7 +23,7 @@ public interface CompetitionParticipantRepository extends JpaRepository<Competit
     Integer getCompetitionIdOfParticipant(int participantId);
 
     @Transactional
-    @Query(value = "SELECT position FROM (SELECT *, row_number() OVER(ORDER BY rating) AS position FROM rating_elo join competition_participant on participant_id = competition_participant.id where competition_id = ?1) result where participant_id = ?2", nativeQuery = true)
+    @Query(value = "SELECT position FROM (SELECT *, row_number() OVER(ORDER BY rating desc) AS position FROM rating_elo join competition_participant on participant_id = competition_participant.id where competition_id = ?1) result where participant_id = ?2", nativeQuery = true)
     Integer getParticipantPosition(int competitionId, int participantId);
 
     @Transactional

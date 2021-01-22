@@ -120,7 +120,7 @@ create or replace function create_rating_round(param_competition_id int, param_r
 	END;
 $$ language plpgsql;
 
-create or replace function add_user_solution(user_login text, solution_location text, solution_language text, comp_id int)
+create or replace function add_user_solution(param_participant_id int, solution_location text, solution_language text)
 	returns int
 	as $$
 	DECLARE
@@ -128,7 +128,7 @@ create or replace function add_user_solution(user_login text, solution_location 
 	BEGIN
 		insert into solution(participant_id, solution_compiler_language, creation_time, file_location, compilation_status)
 			values (
-				(select id from competition_participant where base_user_login = user_login and competition_id = comp_id limit 1),
+				param_participant_id,
 				solution_language,
 				current_timestamp,
 				solution_location,
@@ -370,7 +370,7 @@ create or replace function fill_board_on_startup(
 	END;
 $$ language plpgsql;
 
-create or replace function make_solution_compiled(param_solution_id int)
+create or replace function make_solution_compiled(param_solution_id int, param_executable_location text default null)
 	returns void
 	as $$
 	BEGIN

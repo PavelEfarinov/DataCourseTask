@@ -19,6 +19,8 @@ def generate_organization_names(number: int):
 def generate_organization_description():
     return Faker().paragraph(nb_sentences=5)
 
+def generate_competition_description():
+    return Faker().paragraph(nb_sentences=15)
 
 def generate_organization_address():
     return Faker().address()
