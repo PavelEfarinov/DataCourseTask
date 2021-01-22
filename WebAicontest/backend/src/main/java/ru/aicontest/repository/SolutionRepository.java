@@ -19,4 +19,9 @@ public interface SolutionRepository extends JpaRepository<SolutionEntity, Long> 
     @Modifying
     @Query(value = "SELECT 1 from make_solution_compiled(?1, ?2)", nativeQuery = true)
     List<Integer> compileNewSolution(int solutionId, String executableLocation);
+
+    @Transactional
+    @Modifying
+    @Query(value = "SELECT * from solution where participant_id = ?1", nativeQuery = true)
+    List<SolutionEntity> GetParticipantSolutions(int participantId);
 }

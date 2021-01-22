@@ -374,7 +374,7 @@ create or replace function make_solution_compiled(param_solution_id int, param_e
 	returns void
 	as $$
 	BEGIN
-		update solution set compilation_status = 'successful' where id = param_solution_id;
+		update solution set (compilation_status, executable_location) = ('successful', param_executable_location) where id = param_solution_id;
 	END;
 $$ language plpgsql;
 

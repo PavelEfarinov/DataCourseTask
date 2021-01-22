@@ -31,13 +31,18 @@ export default {
     return {
       file: '',
       language: '',
-      languages: []
+      languages: [],
+      error: '',
     }
   },
 
   beforeMount() {
     this.$root.$on("onSubmitError", (error) => {
-      this.error = error;
+      if (!error) {
+        this.error = 'An error occurred while sending file. make sure to fill all the fields';
+      } else {
+        this.error = error;
+      }
     });
     axios.get("/api/1/solution/languages", {}).then(response => {
       this.languages = response.data;

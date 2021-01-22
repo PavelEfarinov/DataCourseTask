@@ -5,6 +5,27 @@
     </h1>
     <h3>Your rating: {{participant.ratingElo.rating}}</h3>
     <h3>Placing: {{competitiveResult.position}} of {{competitiveResult.allParticipants}}</h3>
+
+    <div class="datatable">
+      <div class="caption">Submitted solutions:</div>
+      <table>
+        <thead>
+        <tr>
+          <th>File Name</th>
+          <th>Language</th>
+          <th>Submission Time</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="solution in solutions" :key="solution.id">
+          <td>{{solution.fileLocation}}</td>
+          <td>{{solution.solutionCompilerLanguage}}</td>
+          <td>{{solution.creationTime}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h3>Created requests:</h3>
     <article v-for="request in requests" :key="request.id">
       <div class="title">
@@ -32,6 +53,7 @@ export default {
   data: function () {
     return {
       requests: [],
+      solutions: [],
       competitiveResult: null,
     };
   },
@@ -46,6 +68,9 @@ export default {
     });
     axios.get("/api/1/participant/" + this.participant.id + "/competitive-result", {}).then(response => {
       this.competitiveResult = response.data;
+    });
+    axios.get("/api/1/solution/" + this.participant.id + "/all", {}).then(response => {
+      this.solutions = response.data;
     });
   }
 }

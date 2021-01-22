@@ -11,6 +11,15 @@ public class SolutionEntity {
     private Timestamp creationTime;
     private String fileLocation;
     private String executableLocation;
+    private String solutionCompilerLanguage;
+
+    public String getSolutionCompilerLanguage() {
+        return solutionCompilerLanguage;
+    }
+
+    public void setSolutionCompilerLanguage(String solutionCompilerLanguage) {
+        this.solutionCompilerLanguage = solutionCompilerLanguage;
+    }
 
     @Id
     @Column(name = "id")

@@ -13,7 +13,7 @@ public class SolutionService {
     }
 
     public void uploadSolution(int participantId, MultipartFile file, String language) {
-        int solutionId = solutionRepository.addNewSolution(participantId, participantId + "/" + file.getOriginalFilename() + "_" + file.getSize(), language).get(0);
+        int solutionId = solutionRepository.addNewSolution(participantId, file.getOriginalFilename(), language).get(0);
         solutionRepository.compileNewSolution(solutionId, participantId + "/compiled/" + file.getOriginalFilename() + "_" + file.getSize());
     }
 }
