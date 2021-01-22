@@ -12,6 +12,24 @@
     <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
     <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
     <div class="error">{{error}}</div>
+    <div class="datatable">
+      <div class="caption">TOP-10 players</div>
+      <table>
+        <thead>
+        <tr>
+          <th>Login</th>
+          <th>Rating</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="player in players" :key="player.baseUserLogin">
+          <td>{{user.baseUserLogin}}</td>
+          <td>{{user.ratings[0].rating}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+
     <h3>TOP-10 players:</h3>
     <div v-for="player in players" :key="player.baseUserLogin">
       {{ player.baseUserLogin }} - {{ player.ratings[0].rating }}
