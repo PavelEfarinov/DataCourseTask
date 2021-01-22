@@ -1,9 +1,9 @@
 <template>
-  <form @submit.prevent="submitRequest">
-    <h3>
-      Send help request for {{ competition.name }}
-    </h3>
-    <div>
+    <form @submit.prevent="submitRequest">
+        <h3>
+            Send help request for {{ competition.name }}
+        </h3>
+        <div>
             <label for="request-theme">
                 Provide a topic of your request:
             </label>
@@ -55,19 +55,22 @@
 </script>
 
 <style scoped>
-  label {
-    display: block;
-    margin-top: 1rem;
-  }
-  .title, textarea {
-    width: 60%;
-    box-sizing: border-box;
-  }
-  input[type='submit'] {
-    margin-top: 1rem;
-    width: 6rem;
-  }
-  .error {
-    color: var(--error-color);
-  }
+    label {
+        display: block;
+        margin-top: 1rem;
+    }
+
+    .title, textarea {
+        width: 60%;
+        box-sizing: border-box;
+    }
+
+    input[type='submit'] {
+        margin-top: 1rem;
+        width: 6rem;
+    }
+
+    .error {
+        color: var(--error-color);
+    }
 </style>
