@@ -4,19 +4,32 @@
       {{ competition.name }}
     </h1>
     <h3>Assigned requests:</h3>
-    <div v-for="request in assignedRequests" :key="request.id">
-      <h4>{{ request.theme + "(" + request.competitionParticipant.baseUserLogin + " | " + request.requestStatus + ")" }}
+    <article v-for="request in assignedRequests" :key="request.id">
+      <div class="title">
+        {{request.theme}}
+      </div>
+      <div class="information">
+        By {{request.competitionParticipant.baseUserLogin}}, status: <b>{{request.requestStatus}}</b>
         <button @click="closeAssignedRequest(request.id)">Close</button>
-      </h4>
-      Description: {{ request.description }}
-    </div>
+      </div>
+      <div class="body">
+        {{ request.description }}
+      </div>
+    </article>
+
     <h3>New requests:</h3>
-    <div v-for="request in openedRequests" :key="request.id">
-      <h4>{{ request.theme + "(" + request.competitionParticipant.baseUserLogin + " | " + request.requestStatus + ")" }}
+    <article v-for="request in openedRequests" :key="request.id">
+      <div class="title">
+        {{request.theme}}
+      </div>
+      <div class="information">
+        By {{request.competitionParticipant.baseUserLogin}}, status: <b>{{request.requestStatus}}</b>
         <button @click="assignNewRequest(request.id)">Assign to me</button>
-      </h4>
-      Description: {{ request.description }}
-    </div>
+      </div>
+      <div class="body">
+        {{ request.description }}
+      </div>
+    </article>
     <button>Create rating round</button>
     <a href="#page=ManageCompetitionEquipment" @click="changePage('ManageCompetitionEquipment')"><button>Manage equipment</button></a>
   </div>

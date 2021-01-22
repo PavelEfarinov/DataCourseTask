@@ -6,10 +6,17 @@
     <h3>Your rating: {{participant.ratingElo.rating}}</h3>
     <h3>Placing: {{competitiveResult.position}} of {{competitiveResult.allParticipants}}</h3>
     <h3>Created requests:</h3>
-    <div v-for="request in requests" :key="request.id">
-      <h4>{{ request.theme + "(" + request.requestStatus + ")" }}</h4>
-      Description: {{ request.description }}
-    </div>
+    <article v-for="request in requests" :key="request.id">
+      <div class="title">
+        {{request.theme}}
+      </div>
+      <div class="information">
+        Status: <b>{{request.requestStatus}}</b>
+      </div>
+      <div class="body">
+        {{ request.description }}
+      </div>
+    </article>
     <br/>
     <a href="#page=CreateCompetitionRequest" @click="changePage('CreateCompetitionRequest')"><button>Create new request</button></a>
   </div>

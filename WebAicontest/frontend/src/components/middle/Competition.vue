@@ -7,9 +7,7 @@
       <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
       <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
     </div>
-    <article>
       <div class="body">{{ competition.description }}</div>
-    </article>
 
     <h3>Starts at:</h3> {{ competition.startDate }}
     <h3>Ends at:</h3>
