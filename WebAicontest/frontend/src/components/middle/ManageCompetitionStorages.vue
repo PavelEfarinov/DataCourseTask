@@ -3,6 +3,7 @@
     <h1>
       {{ competition.name }}
     </h1>
+    <h3>Available storages:</h3>
     <div class="datatable">
       <div class="caption">Available storages</div>
       <table>
@@ -25,39 +26,75 @@
 
     <div v-if="activeStorage">
       <h3>Showing items for {{ activeStorage.name }}:</h3>
-      <table v-for="item in equipment" :key="item.id">
-        <tr>
-          <td>{{ item.name }}</td>
-          <td v-if="item.availability">
-            <button @click="takeItem(item.id)">Take item</button>
-          </td>
-          <td v-else>
-            <strong>This item was taken</strong>
-          </td>
-        </tr>
-      </table>
-      <div v-if="activeStorage.storageManager.id == manager">
-        <h3>Storage records:</h3>
-        <table v-for="item in storageRecords" :key="item.id">
+      <div class="datatable">
+        <div class="caption">Items for {{ activeStorage.name }}:</div>
+        <table>
+          <thead>
           <tr>
-            <td>{{ item.takenEquipment.name }}</td>
-            <td>{{ item.creationDate }}</td>
-            <td>{{ item.responsibleManager.baseUserLogin }}</td>
-            <td>
-              <button @click="returnItem(item.id)">Return item</button>
+            <th>Item</th>
+            <th>Status</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr v-for="item in equipment" :key="item.id">
+            <td>{{ item.name }}</td>
+            <td v-if="item.availability">
+              <button @click="takeItem(item.id)">Take item</button>
+            </td>
+            <td v-else>
+              <strong>This item was taken</strong>
             </td>
           </tr>
+          </tbody>
         </table>
+      </div>
+      <div v-if="activeStorage.storageManager.id == manager">
+        <h3>Storage records:</h3>
+        <div class="datatable">
+          <div class="caption">Storage records</div>
+          <table>
+            <thead>
+            <tr>
+              <th>Item name</th>
+              <th>Creation date</th>
+              <th>Responsible user</th>
+              <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr v-for="item in storageRecords" :key="item.id">
+              <td>{{ item.takenEquipment.name }}</td>
+              <td>{{ item.creationDate }}</td>
+              <td>{{ item.responsibleManager.baseUserLogin }}</td>
+              <td>
+                <button @click="returnItem(item.id)">Return item</button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+        </div>
       </div>
     </div>
     <h3>Your open records:</h3>
-    <table v-for="item in managerRecords" :key="item.id">
-      <tr>
-        <td>{{ item.takenEquipment.name }}</td>
-        <td>{{ item.creationDate }}</td>
-        <td>{{ item.originStorage.name }}</td>
-      </tr>
-    </table>
+    <div class="datatable">
+      <div class="caption">Open records</div>
+      <table>
+        <thead>
+        <tr>
+          <th>Item name</th>
+          <th>Creation date</th>
+          <th>Storage</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in managerRecords" :key="item.id">
+          <td>{{ item.takenEquipment.name }}</td>
+          <td>{{ item.creationDate }}</td>
+          <td>{{ item.originStorage.name }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </template>
 
