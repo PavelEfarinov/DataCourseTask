@@ -71,7 +71,7 @@ export default {
           this.$root.$emit("onSubmitSuccess");
         }
       }).catch(error => {
-        if (!error.data.message) {
+        if (!error.response.data.message) {
           this.$root.$emit("onSubmitError", error.response.data);
         } else {
           this.$root.$emit("onSubmitError", error.response.data.message);
