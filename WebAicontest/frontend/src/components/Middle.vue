@@ -12,6 +12,7 @@
       <CreateCompetitionRequest v-if="page === 'CreateCompetitionRequest'" :participant="participant" :competition="competition"/>
       <CompetitionManager v-if="page === 'CompetitionManager'" :manager="manager" :competition="competition"/>
       <ManageCompetitionStorages v-if="page === 'ManageCompetitionEquipment'" :manager="manager" :competition="competition"/>
+      <CreateSandboxMatch v-if="page === 'CreateSandboxMatch'" :participant="participant" :competition="competition"/>
     </main>
   </div>
 </template>
@@ -28,6 +29,7 @@ import CreateCompetitionRequest from "@/components/middle/CreateCompetitionReque
 import axios from "axios";
 import CompetitionManager from "@/components/middle/CompetitionManager";
 import ManageCompetitionStorages from "@/components/middle/ManageCompetitionStorages";
+import CreateSandboxMatch from "@/components/middle/CreateSandboxMatch";
 
 export default {
   name: "Middle",
@@ -44,6 +46,7 @@ export default {
     // lazy data stuff
   },
   components: {
+    CreateSandboxMatch,
     ManageCompetitionStorages,
     CompetitionManager,
     CompetitionParticipant,

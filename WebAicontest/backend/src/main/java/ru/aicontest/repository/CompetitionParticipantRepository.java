@@ -15,8 +15,8 @@ public interface CompetitionParticipantRepository extends JpaRepository<Competit
     List<CompetitionParticipantEntity> getFirst10OfCompetition(int id);
 
     @Transactional
-    @Query(value = "SELECT count(1) FROM competition_participant where competition_id = ?1", nativeQuery = true)
-    Integer countCompetitionParticipants(int competitionId);
+    @Query(value = "SELECT * FROM competition_participant where competition_id = ?1", nativeQuery = true)
+    List<CompetitionParticipantEntity> getAllCompetitionParticipants(int competitionId);
 
     @Transactional
     @Query(value = "SELECT competition_id FROM competition_participant where id = ?1", nativeQuery = true)
