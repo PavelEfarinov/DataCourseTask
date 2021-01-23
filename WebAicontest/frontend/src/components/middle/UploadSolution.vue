@@ -17,9 +17,9 @@
 
                 </div>
                 <div class="button-field">
-                    <input type="submit" value="Submit">
+                    <div class="error">{{ error }}</div>
+                    <input class="submit-button" type="submit" value="Submit">
                 </div>
-                <div class="error">{{ error }}</div>
             </form>
 
         </div>
@@ -74,6 +74,35 @@
     }
 
     .error {
+        font-size: small;
         color: var(--error-color);
+        margin-left: 1rem;
     }
+
+    .button-field {
+        margin: 1rem;
+        display: grid;
+        grid-template-columns: 35% 35% 30%;
+    }
+
+    .submit-button {
+        margin: 1%;
+        border-radius: 12px;
+        background-color: var(--datatable-color);
+        border: none;
+        padding: 15px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        color: black;
+        transition-duration: 0.4s;
+
+    }
+
+    .submit-button:hover {
+        background-color: var(--border-color); /* Green */
+        color: white;
+    }
+
 </style>

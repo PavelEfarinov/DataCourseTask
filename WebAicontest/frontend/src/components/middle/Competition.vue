@@ -3,9 +3,10 @@
     <h1>
       {{ competition.name }}
     </h1>
-    <div v-if="user">
-      <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
-      <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
+    <div class="buttons" v-if="user">
+        <a href="#page=CompetitionParticipant" @click="changePage('CompetitionParticipant')"><button>Take part in the competition</button></a>
+        <a href="#page=CompetitionManager" @click="changePage('CompetitionManager')"><button>Manage the competition</button></a>
+      <div class="error">{{error}}</div>
     </div>
       <div class="body">{{ competition.description }}</div>
 
@@ -14,7 +15,6 @@
     <div v-if="competition.endDate">{{ competition.endDate }}</div>
     <div v-else>This competition does not have proper end date.</div>
     <br/>
-    <div class="error">{{error}}</div>
     <div class="datatable">
       <div class="caption">TOP-10 players</div>
       <table>
@@ -81,5 +81,12 @@ export default {
 </script>
 
 <style scoped>
-
+.buttons {
+  display: grid;
+  grid-template-columns: 35% 35% 30%;
+}
+  .error {
+    margin-left: auto;
+    margin-top: 0.5rem;
+  }
 </style>

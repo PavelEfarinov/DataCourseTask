@@ -72,5 +72,6 @@
 
     .error {
         color: var(--error-color);
+        margin-left: auto;
     }
 </style>
