@@ -1,14 +1,45 @@
 package ru.aicontest.domain;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "match_log", schema = "public", catalog = "postgres")
 public class MatchLogEntity {
     private int id;
+    private SimulationMapEntity matchMap;
+    private List<MatchSettingsEntity> matchSettings;
+    private List<MatchTickEntity> matchTicks;
+
+    @OneToOne
+    @JoinColumn(name = "match_map_id", referencedColumnName = "id")
+    public SimulationMapEntity getMatchMap() {
+        return matchMap;
+    }
+
+    public void setMatchMap(SimulationMapEntity matchMap) {
+        this.matchMap = matchMap;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "match_log_id", referencedColumnName = "id")
+    public List<MatchSettingsEntity> getMatchSettings() {
+        return matchSettings;
+    }
+
+    public void setMatchSettings(List<MatchSettingsEntity> matchSettings) {
+        this.matchSettings = matchSettings;
+    }
+
+    @OneToMany
+    @JoinColumn(name = "match_log_id", referencedColumnName = "id")
+    public List<MatchTickEntity> getMatchTicks() {
+        return matchTicks;
+    }
+
+    public void setMatchTicks(List<MatchTickEntity> matchTicks) {
+        this.matchTicks = matchTicks;
+    }
 
     @Id
     @Column(name = "id")

@@ -254,7 +254,7 @@ create index rating_match_round_idx on rating_match using hash (rating_round_id)
 create table sandbox_match (
 	match_id int not null,
 	competition_id int not null,
-	primary key (match_id, competition_id),
+	primary key (match_id),
 	foreign key (match_id) references match(id) on delete cascade,
 	foreign key (competition_id) references competition(id) on delete cascade
 );

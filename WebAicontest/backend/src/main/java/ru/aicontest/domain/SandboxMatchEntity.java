@@ -4,10 +4,12 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "sandbox_match", schema = "public", catalog = "postgres")
-@IdClass(SandboxMatchEntityPK.class)
 public class SandboxMatchEntity {
     private int matchId;
     private int competitionId;
+
+    @OneToOne(mappedBy = "match_id")
+    private MatchEntity matchEntity;
 
     @Id
     @Column(name = "match_id")
@@ -19,7 +21,6 @@ public class SandboxMatchEntity {
         this.matchId = matchId;
     }
 
-    @Id
     @Column(name = "competition_id")
     public int getCompetitionId() {
         return competitionId;

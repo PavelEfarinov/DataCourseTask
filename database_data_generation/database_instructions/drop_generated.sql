@@ -33,6 +33,7 @@ drop function add_match_tick;
 drop function add_player_position;
 drop function fill_board_on_startup;
 drop function make_solution_compiled;
+drop function start_match;
 drop function add_rating_round;
 drop function find_recent_solution;
 drop function start_chess_rating_round;
