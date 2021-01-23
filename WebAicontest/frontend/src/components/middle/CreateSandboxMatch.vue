@@ -16,15 +16,27 @@
         </div>
         <div class="line">
           <div class="field-name">
-          Choose your opponent:
+            Choose your opponent:
           </div>
-          <select class="select-css" v-model="competitor">
-            <option v-for="competitorItem in competitors" :key="competitorItem.id" v-bind:value="competitorItem.id">
-              {{ competitorItem.baseUserLogin }} | {{competitorItem.ratingElo.rating}}
+          <select class="select-css" v-model="competitor" @change="getCompetitorSolutions(competitor)">
+            <option v-for="competitorItem in competitors" :key="competitorItem.id" v-bind:value="competitorItem">
+              {{ competitorItem.baseUserLogin }} | {{ competitorItem.ratingElo.rating }}
             </option>
           </select>
         </div>
-        <div class="button-field">
+        <div class="line" v-if="competitor">
+          <div class="field-name">
+            Choose your opponent's solution:
+          </div>
+          <select class="select-css" v-model="competitorSolution">
+            <option v-for="opponentSolution in competitorSolutions" :key="opponentSolution.id"
+                    v-bind:value="opponentSolution.id">
+              {{ opponentSolution.solutionCompilerLanguage }} |
+              {{ opponentSolution.fileLocation }} | {{ opponentSolution.creationTime }}
+            </option>
+          </select>
+        </div>
+        <div class="button-field" v-if="competitorSolution">
           <input type="submit" value="Create match">
         </div>
         <div class="error">{{ error }}</div>
@@ -42,29 +54,47 @@ export default {
   data: function () {
     return {
       solutions: [],
-      solution: '',
+      solution: null,
       maps: [],
-      map: '',
+      map: null,
       competitors: [],
-      competitor: [],
+      competitor: null,
       competitorSolutions: [],
-      competitorSolution: '',
+      competitorSolution: null,
       error: '',
     }
   },
   methods:
       {
         onSubmitMatch: function () {
-          alert(this.solution);
+          axios.post("/api/1/match/create-match", {
+            creatorParticipantId: this.participant.id,
+            opponentParticipantId: this.competitor.id,
+            creatorSolutionId: this.solution,
+            opponentSolutionId: this.competitorSolution,
+          }).then(this.changePage("CompetitionParticipant"));
         },
-        setSolution: function (solution) {
-          this.solution = solution;
+        getCompetitorSolutions: function (participant) {
+          this.competitorSolution = null;
+          axios.get("/api/1/solution/" + participant.id + "/all", {}).then(response => {
+            this.competitorSolutions = response.data;
+          });
+        }
+        ,
+        getParticipantSolutions: function (participant) {
+          if (participant) {
+            axios.get("/api/1/solution/" + participant.id + "/all", {}).then(response => {
+              this.solutions = response.data;
+            });
+          }
+        }
+        ,
+        changePage: function (page) {
+          this.$root.$emit("onChangePage", page);
         }
       },
   beforeMount() {
-    axios.get("/api/1/solution/" + this.participant.id + "/all", {}).then(response => {
-      this.solutions = response.data;
-    });
+    this.getParticipantSolutions(this.participant);
     axios.get("/api/1/participant/competition/" + this.competition.id + "/all-participants", {}).then(response => {
       this.competitors = response.data;
     });
@@ -73,11 +103,12 @@ export default {
 </script>
 
 <style scoped>
-  .line {
-    margin: 5%;
-    display: grid;
-    grid-template-columns: 50% 50%;
-  }
+.line {
+  margin: 5%;
+  display: grid;
+  grid-template-columns: 50% 50%;
+}
+
 .select-css {
   display: block;
   font-size: 16px;
@@ -91,14 +122,15 @@ export default {
   box-sizing: border-box;
   margin: 0;
   border: 1px solid #aaa;
-  box-shadow: 0 1px 0 1px rgba(0,0,0,.04);
+  box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
   border-radius: .5em;
   -moz-appearance: none;
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
 }
-  .field-name {
-    margin-top: 5%;
-  }
+
+.field-name {
+  margin-top: 5%;
+}
 </style>
