@@ -46,6 +46,7 @@ class DatabaseFunctionsInvoker:
         return new_match_id
 
     def fill_match_with_turns(self, test_chess_match_id: int, whites_solution: int, blacks_solution: int):
+        self.cursor.execute('select start_match(%s)', (test_chess_match_id,))
         for i in range(TURN_NUMBER):
             self.cursor.execute('select add_match_tick(%s, \'\', %s)', (test_chess_match_id, i,))
             match_tick_id = self.cursor.fetchone()[0]

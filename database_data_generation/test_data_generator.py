@@ -81,6 +81,11 @@ try:
                                 user_1.participant_id if random.randrange(100) > 50 else user_2.participant_id,
                                 white_black_tuple[0], white_black_tuple[1])
                             dfi.fill_match_with_turns(test_match, white_black_tuple[0], white_black_tuple[1])
+                            winner_tuple = (user_1, user_2) if random.randrange(100) > 50 else (
+                                user_2, user_1)
+                            dfi.add_user_results(test_match, winner_tuple[0].participant_id, 1)
+                            dfi.add_user_results(test_match, winner_tuple[1].participant_id, 0)
+                            dfi.end_match(test_match)
 
         print('generating organization part of the competition')
 

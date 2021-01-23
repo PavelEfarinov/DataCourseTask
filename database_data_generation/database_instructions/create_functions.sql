@@ -378,6 +378,14 @@ create or replace function make_solution_compiled(param_solution_id int, param_e
 	END;
 $$ language plpgsql;
 
+create or replace function start_match(param_match_id int)
+	returns void
+	as $$
+	BEGIN
+		update match set (start_time, match_status) = (localtimestamp, 'running') where id = param_match_id;
+	END;
+$$ language plpgsql;
+
 create or replace function add_rating_round(param_competition_id int, param_start_time timestamp)
 	returns int
 	as $$

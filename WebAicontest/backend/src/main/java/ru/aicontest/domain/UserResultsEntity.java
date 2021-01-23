@@ -9,6 +9,17 @@ public class UserResultsEntity {
     private int matchResultId;
     private int participantId;
     private Float result;
+    private CompetitionParticipantEntity participant;
+
+    @OneToOne
+    @JoinColumn(name = "participant_id", referencedColumnName = "id", insertable = false, updatable = false)
+    public CompetitionParticipantEntity getParticipant() {
+        return participant;
+    }
+
+    public void setParticipant(CompetitionParticipantEntity participant) {
+        this.participant = participant;
+    }
 
     @Id
     @Column(name = "match_result_id")

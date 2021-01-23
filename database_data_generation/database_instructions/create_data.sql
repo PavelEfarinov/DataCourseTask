@@ -65,6 +65,8 @@ test_chess_match_id = create_match(null, 'standard chess map', false, null, ARRA
 perform add_match_settings('white_player', test_vanya_solution_id::text, test_chess_match_id);
 perform add_match_settings('black_player', test_petya_solution_id::text, test_chess_match_id);
 
+perform start_match(test_chess_match_id);
+
 test_first_match_tick = add_match_tick(test_chess_match_id, '', 0);
 
 perform fill_board_on_startup(

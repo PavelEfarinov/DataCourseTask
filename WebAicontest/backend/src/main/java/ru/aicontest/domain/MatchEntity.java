@@ -9,6 +9,50 @@ public class MatchEntity {
     private int id;
     private String matchStatus;
     private Timestamp startTime;
+//    private RatingMatchEntity ratingMatch;
+    private SandboxMatchEntity sandboxMatch;
+    private CompetitionParticipantEntity creatorParticipant;
+    private MatchResultEntity matchResult;
+
+    @OneToOne
+    @JoinColumn(name = "match_result_id", referencedColumnName = "id")
+    public MatchResultEntity getMatchResult() {
+        return matchResult;
+    }
+
+    public void setMatchResult(MatchResultEntity matchResult) {
+        this.matchResult = matchResult;
+    }
+
+    @ManyToOne
+    @JoinColumn(name = "creator_participant_id", referencedColumnName = "id")
+    public CompetitionParticipantEntity getCreatorParticipant() {
+        return creatorParticipant;
+    }
+
+    public void setCreatorParticipant(CompetitionParticipantEntity creatorParticipant) {
+        this.creatorParticipant = creatorParticipant;
+    }
+
+//    @OneToOne
+//    @JoinColumn(name = "id", referencedColumnName = "match_id")
+//    public RatingMatchEntity getRatingMatch() {
+//        return ratingMatch;
+//    }
+//
+//    public void setRatingMatch(RatingMatchEntity ratingMatch) {
+//        this.ratingMatch = ratingMatch;
+//    }
+
+    @OneToOne
+    @JoinColumn(name = "id", referencedColumnName = "match_id")
+    public SandboxMatchEntity getSandboxMatch() {
+        return sandboxMatch;
+    }
+
+    public void setSandboxMatch(SandboxMatchEntity sandboxMatch) {
+        this.sandboxMatch = sandboxMatch;
+    }
 
     @Id
     @Column(name = "id")

@@ -7,7 +7,7 @@ import ru.aicontest.domain.SolutionCompilerEntity;
 
 import java.util.List;
 
-public interface SolutionCompilerRepository extends JpaRepository<SolutionCompilerEntity, Long> {
+public interface SolutionCompilerRepository extends JpaRepository<SolutionCompilerEntity, String> {
     @Transactional
     @Query(value = "SELECT language FROM solution_compiler", nativeQuery = true)
     List<String> getAllAvailableLanguages();
