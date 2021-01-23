@@ -10,10 +10,16 @@
     </div>
       <div class="body">{{ competition.description }}</div>
 
-    <h3>Starts at:</h3> {{ competition.startDate }}
-    <h3>Ends at:</h3>
-    <div v-if="competition.endDate">{{ competition.endDate }}</div>
-    <div v-else>This competition does not have proper end date.</div>
+    <div class="duration-info">
+      <div class="time-info">
+        <h3>Starts at:</h3> {{ competition.startDate }}
+      </div>
+      <div class="time-info">
+        <h3>Ends at:</h3>
+        <div v-if="competition.endDate">{{ competition.endDate }}</div>
+        <div v-else>This competition does not have proper end date.</div>
+      </div>
+    </div>
     <br/>
     <div class="datatable">
       <div class="caption">TOP-10 players</div>
@@ -84,9 +90,14 @@ export default {
 .buttons {
   display: grid;
   grid-template-columns: 35% 35% 30%;
+  margin-bottom: 2rem;
 }
   .error {
     margin-left: auto;
     margin-top: 0.5rem;
+  }
+  .duration-info {
+    display: grid;
+    grid-template-columns: 35% 45%;
   }
 </style>
