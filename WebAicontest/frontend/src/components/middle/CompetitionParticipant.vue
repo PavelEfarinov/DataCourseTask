@@ -3,9 +3,21 @@
     <h1>
       {{ competition.name }}
     </h1>
-    <h3>Your rating: {{ participant.ratingElo.rating }}</h3>
-    <h3>Placing: {{ competitiveResult.position }} of {{ competitiveResult.allParticipants }}</h3>
-    <a href="#page=UploadSolution" @click="changePage('UploadSolution')">Upload solution</a>
+    <div class="competition-header">
+      <div class="main-info">
+        <h3>Your rating: {{ participant.ratingElo.rating }}</h3>
+        <h3>Placing: {{ competitiveResult.position }} of {{ competitiveResult.allParticipants }}</h3>
+      </div>
+      <a href="#page=UploadSolution" @click="changePage('UploadSolution')">
+        <button class="upload-button">Upload solution</button>
+      </a>
+      <a href="#page=CreateSandboxMatch" @click="changePage('CreateSandboxMatch')">
+        <button>Create new sandbox match</button>
+      </a>
+      <a href="#page=CreateCompetitionRequest" @click="changePage('CreateCompetitionRequest')">
+        <button>Create new request</button>
+      </a>
+    </div>
     <div class="datatable">
       <div class="caption">Submitted solutions:</div>
       <table>
@@ -25,7 +37,6 @@
         </tbody>
       </table>
     </div>
-    <a href="#page=CreateSandboxMatch" @click="changePage('CreateSandboxMatch')">Create new sandbox match</a>
     <div class="datatable">
       <div class="caption">Your matches:</div>
       <table>
@@ -56,7 +67,7 @@
       </table>
     </div>
 
-    <h3>Created requests:</h3>
+    <h2>Created requests:</h2>
     <article v-for="request in requests" :key="request.id">
       <div class="title">
         {{ request.theme }}
@@ -69,9 +80,6 @@
       </div>
     </article>
     <br/>
-    <a href="#page=CreateCompetitionRequest" @click="changePage('CreateCompetitionRequest')">
-      <button>Create new request</button>
-    </a>
   </div>
 </template>
 
@@ -112,5 +120,15 @@ export default {
 </script>
 
 <style scoped>
-
+.competition-header {
+  display: grid;
+  grid-template-columns: 40% 20% 20% 20%;
+}
+.upload-button {
+  padding-top: 12.5%;
+  padding-bottom: 12.5%;
+}
+  h3 {
+    margin-top: 0;
+  }
 </style>
