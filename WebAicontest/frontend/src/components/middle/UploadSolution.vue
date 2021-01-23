@@ -4,7 +4,7 @@
         <div class="body">
             <div class="line">
                 Choose a language:
-                <select v-model="language">
+                <select v-model="language" class="select-css">
                     <option v-for="lang in languages" v-bind:key="lang">{{ lang }}</option>
                 </select>
             </div>
@@ -103,6 +103,21 @@
     .submit-button:hover {
         background-color: var(--border-color); /* Green */
         color: white;
+    }
+
+
+    .select-css {
+        display: block;
+        font-size: 16px;
+        font-weight: 700;
+        color: #444;
+        line-height: 1.3;
+        box-sizing: border-box;
+        margin: 0;
+        border: 1px solid #aaa;
+        border-radius: .5em;
+        -moz-appearance: none;
+        background-color: #fff;
     }
 
 </style>

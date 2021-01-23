@@ -5,7 +5,7 @@
       <form @submit.prevent="onSubmitMatch">
         <div class="line">
           <div class="field-name">
-            Choose your solution:
+            Your solution:
           </div>
           <select class="select-css" v-model="solution">
             <option v-for="sol in solutions" :key="sol.id" v-bind:value="sol.id" @select="setSolution(sol)">
@@ -16,7 +16,7 @@
         </div>
         <div class="line">
           <div class="field-name">
-            Choose your opponent:
+            Your opponent:
           </div>
           <select class="select-css" v-model="competitor" @change="getCompetitorSolutions(competitor)">
             <option v-for="competitorItem in competitors" :key="competitorItem.id" v-bind:value="competitorItem">
@@ -26,7 +26,7 @@
         </div>
         <div class="line" v-if="competitor">
           <div class="field-name">
-            Choose your opponent's solution:
+            Opponent's solution:
           </div>
           <select class="select-css" v-model="competitorSolution">
             <option v-for="opponentSolution in competitorSolutions" :key="opponentSolution.id"
@@ -37,9 +37,9 @@
           </select>
         </div>
         <div class="button-field" v-if="competitorSolution">
-          <input type="submit" value="Create match">
+          <div class="error">{{ error }}</div>
+          <input class="submit-button" type="submit" value="Create match">
         </div>
-        <div class="error">{{ error }}</div>
       </form>
     </div>
   </div>
@@ -103,11 +103,43 @@ export default {
 </script>
 
 <style scoped>
-.line {
-  margin: 5%;
-  display: grid;
-  grid-template-columns: 50% 50%;
-}
+  .line {
+    display: grid;
+    grid-template-columns: 37% 63%;
+    margin: 1rem;
+  }
+
+  .error {
+    font-size: small;
+    color: var(--error-color);
+    margin-left: 1rem;
+  }
+
+  .button-field {
+    margin: 1rem;
+    display: grid;
+    grid-template-columns: 35% 35% 30%;
+  }
+
+  .submit-button {
+    margin: 1%;
+    border-radius: 12px;
+    background-color: var(--datatable-color);
+    border: none;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    color: black;
+    transition-duration: 0.4s;
+
+  }
+
+  .submit-button:hover {
+    background-color: var(--border-color); /* Green */
+    color: white;
+  }
 
 .select-css {
   display: block;
@@ -116,7 +148,6 @@ export default {
   font-weight: 700;
   color: #444;
   line-height: 1.3;
-  padding: .6em 1.4em .5em .8em;
   /*width: 60%;*/
   /*max-width: 60%; !* useful when width is set to anything other than 100% *!*/
   box-sizing: border-box;
@@ -125,12 +156,10 @@ export default {
   box-shadow: 0 1px 0 1px rgba(0, 0, 0, .04);
   border-radius: .5em;
   -moz-appearance: none;
-  -webkit-appearance: none;
-  appearance: none;
   background-color: #fff;
 }
 
 .field-name {
-  margin-top: 5%;
+  /*margin-top: 5%;*/
 }
 </style>
