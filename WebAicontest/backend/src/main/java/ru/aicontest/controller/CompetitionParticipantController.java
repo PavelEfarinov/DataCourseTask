@@ -7,6 +7,8 @@ import org.springframework.web.bind.annotation.RestController;
 import ru.aicontest.domain.CompetitionParticipantEntity;
 import ru.aicontest.repository.CompetitionParticipantRepository;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/api/1/participant")
 public class CompetitionParticipantController {
@@ -26,12 +28,17 @@ public class CompetitionParticipantController {
         return participant;
     }
 
+    @GetMapping("/competition/{competitionId}/all-participants")
+    List<CompetitionParticipantEntity> getAllCompetitionParticipants(@PathVariable int competitionId) {
+        return competitionParticipantRepository.getAllCompetitionParticipants(competitionId);
+    }
+
     @GetMapping("{participantId}/competitive-result")
     CompetitionParticipantRatingPositionDTO getCompetitiveResult(@PathVariable int participantId) {
         CompetitionParticipantRatingPositionDTO result = new CompetitionParticipantRatingPositionDTO();
 
         int competitionId = competitionParticipantRepository.getCompetitionIdOfParticipant(participantId);
-        result.setAllParticipants(competitionParticipantRepository.countCompetitionParticipants(competitionId));
+        result.setAllParticipants(competitionParticipantRepository.getAllCompetitionParticipants(competitionId).size());
         result.setPosition(competitionParticipantRepository.getParticipantPosition(competitionId, participantId));
 
         return result;

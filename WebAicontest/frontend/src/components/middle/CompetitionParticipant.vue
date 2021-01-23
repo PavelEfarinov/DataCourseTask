@@ -5,7 +5,7 @@
     </h1>
     <h3>Your rating: {{ participant.ratingElo.rating }}</h3>
     <h3>Placing: {{ competitiveResult.position }} of {{ competitiveResult.allParticipants }}</h3>
-
+    <a href="#page=UploadSolution" @click="changePage('UploadSolution')">Upload solution</a>
     <div class="datatable">
       <div class="caption">Submitted solutions:</div>
       <table>
@@ -25,7 +25,7 @@
         </tbody>
       </table>
     </div>
-
+    <a href="#page=CreateSandboxMatch" @click="changePage('CreateSandboxMatch')">Create new sandbox match</a>
     <div class="datatable">
       <div class="caption">Your matches:</div>
       <table>
@@ -72,8 +72,6 @@
     <a href="#page=CreateCompetitionRequest" @click="changePage('CreateCompetitionRequest')">
       <button>Create new request</button>
     </a>
-    <a href="#page=UploadSolution" @click="changePage('UploadSolution')">Upload solution</a>
-    <a href="#page=CreateSandboxMatch" @click="changePage('CreateSandboxMatch')">Create new sandbox match</a>
   </div>
 </template>
 
