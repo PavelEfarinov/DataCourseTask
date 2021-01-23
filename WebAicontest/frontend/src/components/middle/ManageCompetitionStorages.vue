@@ -181,5 +181,8 @@ export default {
 </script>
 
 <style scoped>
-
+button {
+    padding: 5px 15px;
+    border-radius: 5px;
+}
 </style>
