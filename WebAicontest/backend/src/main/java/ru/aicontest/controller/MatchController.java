@@ -24,8 +24,8 @@ public class MatchController {
     }
 
     @PostMapping("create-match")
-    public List<MatchEntity> createNewMatch(@PathVariable int participantId){
-        return matchRepository.getAllParticipantMatches(participantId);
+    public void createNewMatch(@RequestBody NewMatchRequestDTO matchRequestDTO){
+        matchService.createNewMatch(matchRequestDTO.creatorParticipantId, matchRequestDTO.opponentParticipantId, matchRequestDTO.creatorSolutionId, matchRequestDTO.opponentSolutionId);
     }
 
     private static class NewMatchRequestDTO

@@ -11,8 +11,16 @@ public class MatchService {
         this.matchRepository = matchRepository;
     }
 
-    public void createNewMatch(int participantId)
+    public void createNewMatch(int creatorId, int opponentId, int creatorSolutionId, int opponentSolutionId)
     {
-        matchRepository.createNewMatch(participantId);
+        int matchId = matchRepository.createNewSandboxMatch(creatorId, "standard chess map", creatorSolutionId, opponentSolutionId).get(0);
+        matchRepository.addMatchSettings("white_player", creatorSolutionId + "", matchId);
+        matchRepository.addMatchSettings("black_player", opponentSolutionId + "", matchId);
+        matchRepository.startMatch( matchId);
+        int tick = matchRepository.addMatchTick( matchId).get(0);
+        matchRepository.fillBoardOnStartup(tick, creatorSolutionId, opponentSolutionId);
+        matchRepository.addUserResults(matchId, creatorId, 1);
+        matchRepository.addUserResults(matchId, opponentId, 0);
+        matchRepository.endMatch(matchId);
     }
 }
